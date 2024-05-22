@@ -2,6 +2,7 @@ plugins {
 	id 'java'
 	id 'org.springframework.boot' version '3.2.5'
 	id 'io.spring.dependency-management' version '1.1.4'
+	id 'org.openapi.generator' version '7.5.0'
 }
 
 group = 'de.dak.adipositas'
@@ -39,4 +40,11 @@ dependencyManagement {
 
 tasks.named('test') {
 	useJUnitPlatform()
+}
+
+openApiGenerate {
+	generatorName.set("java")
+	inputSpec.set("$rootDir/src/resources/openapi.yaml")
+	outputDir.set("$rootDir/build/generated")
+	configFile.set("$rootDir/src/resources/open-api/configJavaServer.json")
 }

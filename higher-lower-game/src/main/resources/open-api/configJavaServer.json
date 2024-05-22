@@ -1,0 +1,23 @@
+{
+  "title": "Higherlowergame",
+  "groupId": "de.dak.adipositas",
+  "artifactId": "higher-lower-game-api",
+  "hideGenerationTimestamp": "false",
+  "basePackage": "de.dak.adipositas",
+  "apiPackage": "de.dak.adipositas.api",
+  "configPackage": "de.dak.adipositas.configuration",
+  "invokerPackage": "de.dak.adipositas.api",
+  "modelPackage": "de.dak.adipositas.model",
+  "booleanGetterPrefix": "is",
+  "dateLibrary": "java8",
+  "java8": true,
+  "interfaceOnly": true,
+  "library": "spring-boot",
+  "sourceFolder": "src/main/java",
+  "useOptional": false,
+  "withXml": false,
+  "serializableModel": true,
+  "useTags": true,
+  "useSpringBoot3": true,
+  "useRequestMappingOnInterface": true
+}
