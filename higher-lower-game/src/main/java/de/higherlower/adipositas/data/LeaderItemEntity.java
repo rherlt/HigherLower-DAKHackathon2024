@@ -14,7 +14,10 @@ public class LeaderItemEntity {
     @Id
     @GeneratedValue
     @UuidGenerator
-    private UUID gameId;
+    private UUID id;
+
+    @Column
+    private String gameId;
 
     @Column
     private String name;
@@ -28,11 +31,15 @@ public class LeaderItemEntity {
     @Column
     private String date;
 
-    public String getGameId() {
-        return gameId != null ? gameId.toString() : null;
+    public UUID getId() {
+        return id;
     }
 
-    public void setGameId(UUID gameId) {
+    public String getGameId() {
+        return gameId;
+    }
+
+    public void setGameId(String gameId) {
         this.gameId = gameId;
     }
 
