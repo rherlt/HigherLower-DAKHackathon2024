@@ -2,7 +2,7 @@ openapi: 3.1.0
 info:
   description: 'This API definines the endpoints for the HigherLower Game'
   title: Higher Lower Game
-  version: 0.0.1
+  version: 0.0.2
 servers:
   - url: "{protocol}://{environment}:{port}/"
     variables:
@@ -139,9 +139,9 @@ components:
           example: 81b988a8-a3dc-4f85-8cae-21daf6b25102
           type: string
         score:
-          description: Image of option1 as base64
+          description: Score of the game play
           example: 1000
-          type: number
+          type: integer
         date:
           description: Date of the Gameplay as RFC3339
           example: '2020-12-09 16:09:53+00:00'
