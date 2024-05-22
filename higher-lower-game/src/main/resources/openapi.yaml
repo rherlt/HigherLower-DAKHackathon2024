@@ -1,0 +1,155 @@
+openapi: 3.1.0
+info:
+  description: 'This API definines the endpoints for the HigherLower Game'
+  title: Higher Lower Game
+  version: 0.0.1
+servers:
+  - url: "{protocol}://{environment}:{port}/"
+    variables:
+      protocol:
+        default: http
+        description: Protokolle, welche für die Kommunikation verwendet werden können.
+        enum:
+          - http
+          - https
+      environment:
+        default: localhost
+        description: 'Environments: local (localhost), dev (higherlower.dak.on2.cloud)'
+        enum:
+          - localhost
+          - higherlower.dak.on2.cloud
+      port:
+        default: '9001'
+        description: Used ports.
+        enum:
+          - '443'
+          - '80'
+          - '9001'
+tags:
+  - description: Gameplay
+    name: Gameplay
+  - description: Leaderboard
+    name: Leaderboard
+paths:
+  /question:
+    get:
+      tags: 
+        - Gameplay
+      operationId: getQuestion
+      responses:
+        '200':
+          description: Gives a question, two possible answers as options and a the valid answer.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QuestionResponse'
+  /gameResult:
+    post:
+      tags: 
+        - Gameplay
+      operationId: postGameResult
+      requestBody:
+        description: A result of a game play
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LeaderboardItem'
+      responses:
+        '201':
+          description: Game result successfully created
+          
+  /leaderboard:
+    get:
+      tags: 
+        - Leaderboard
+      operationId: getLeaderboard
+      responses:
+        '200':
+          description: Gives loaderboard with the current high scores of the users
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LeaderboardResponse'
+components:
+  schemas:
+    QuestionResponse:
+      description: Question response
+      properties:
+        question:
+          description: Question
+          example: What has more calories?
+          type: string
+        option1Text:
+          description: Text of the option1
+          example: Cola
+          type: string
+        option2Text:
+          description: Text of the option2
+          example: Apfel
+          type: string
+        option1Image:
+          description: Image of option1 as base64
+          example: ABCDBase64
+          type: string
+        option2Image:
+          description:  Image of option2 as base64
+          example: ABCDBase64
+          type: string
+        explanation:
+          description: Explanation of the result
+          example: Cola has more calories because, ...
+          type: string
+        result:
+          description: Text of the option1
+          example: option1
+          type: string
+          enum:
+            - option1
+            - option2
+      required:
+        - question
+        - option1Text
+        - option2Text
+        - option1Image
+        - option2Image
+        - explanation
+        - result
+      type: object
+    
+    LeaderboardResponse:
+      description: Ordered list of the leader board. Users with their highest scores
+      type: array
+      items:
+        $ref: '#/components/schemas/LeaderboardItem'
+  
+    LeaderboardItem:
+      description: Item of the leader board list
+      properties:
+        name:
+          description: Name of the user
+          example: Max Mustermann
+          type: string
+        userId:
+          description: Id of the user, use synthetical number
+          example: A1234567890
+          type: string
+        gameId:
+          description: Unique Id of the game, use uuid
+          example: 81b988a8-a3dc-4f85-8cae-21daf6b25102
+          type: string
+        score:
+          description: Image of option1 as base64
+          example: 1000
+          type: number
+        date:
+          description: Date of the Gameplay as RFC3339
+          example: '2020-12-09 16:09:53+00:00'
+          type: string
+      required:
+        - name
+        - userId
+        - gameId
+        - score
+        - date
+      type: object
