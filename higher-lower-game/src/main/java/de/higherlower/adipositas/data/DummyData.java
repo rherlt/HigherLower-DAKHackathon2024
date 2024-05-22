@@ -1,4 +1,4 @@
-package de.higherlower.adipositas;
+package de.higherlower.adipositas.data;
 
 import de.higherlower.adipositas.model.LeaderboardItem;
 import de.higherlower.adipositas.model.QuestionResponse;

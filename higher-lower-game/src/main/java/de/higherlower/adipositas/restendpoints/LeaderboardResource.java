@@ -1,6 +1,6 @@
 package de.higherlower.adipositas.restendpoints;
 
-import de.higherlower.adipositas.DummyData;
+import de.higherlower.adipositas.data.DummyData;
 import de.higherlower.adipositas.api.LeaderboardApi;
 import de.higherlower.adipositas.model.LeaderboardItem;
 import org.springframework.http.ResponseEntity;

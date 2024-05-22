@@ -4,4 +4,4 @@ services:
       context: .
     image: local/higherlower:latest
     ports:
-      - "8080:8080"
+      - "9001:8080"
