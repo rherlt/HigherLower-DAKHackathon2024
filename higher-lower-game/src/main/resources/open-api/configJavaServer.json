@@ -19,5 +19,6 @@
   "serializableModel": true,
   "useTags": true,
   "useSpringBoot3": true,
-  "useRequestMappingOnInterface": true
+  "useRequestMappingOnInterface": true,
+  "openApiNullable": false
 }
