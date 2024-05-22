@@ -1,3 +1,9 @@
+buildscript {
+	dependencies {
+		classpath "org.openapitools:openapi-generator-gradle-plugin:7.5.0"
+	}
+}
+
 plugins {
 	id 'java'
 	id 'org.springframework.boot' version '3.2.5'
@@ -5,16 +11,20 @@ plugins {
 	id 'org.openapi.generator' version '7.5.0'
 }
 
-group = 'de.dak.adipositas'
+apply plugin: 'org.openapi.generator'
+
+group = 'de.higherlower.adipositas'
 version = '0.0.1-SNAPSHOT'
 
+
 java {
-	sourceCompatibility = '17'
+	sourceCompatibility = JavaVersion.VERSION_17
+	targetCompatibility = JavaVersion.VERSION_17
 }
 
 repositories {
+	mavenLocal()
 	mavenCentral()
-	maven { url 'https://repo.spring.io/milestone' }
 }
 
 ext {
@@ -43,8 +53,12 @@ tasks.named('test') {
 }
 
 openApiGenerate {
-	generatorName.set("java")
-	inputSpec.set("$rootDir/src/resources/openapi.yaml")
-	outputDir.set("$rootDir/build/generated")
-	configFile.set("$rootDir/src/resources/open-api/configJavaServer.json")
+	generatorName.set("spring")
+	inputSpec.set("$rootDir/src/main/resources/open-api/openapi.yaml")
+	outputDir.set("$rootDir/build/generated/sources")
+	configFile.set("$rootDir/src/main/resources/open-api/configJavaServer.json")
+}
+
+afterEvaluate {
+	tasks.compileJava.dependsOn(tasks.openApiGenerate)
 }
