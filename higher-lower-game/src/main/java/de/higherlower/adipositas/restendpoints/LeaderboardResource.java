@@ -1,5 +1,6 @@
 package de.higherlower.adipositas.restendpoints;
 
+import de.higherlower.adipositas.DummyData;
 import de.higherlower.adipositas.api.LeaderboardApi;
 import de.higherlower.adipositas.model.LeaderboardItem;
 import org.springframework.http.ResponseEntity;
@@ -12,6 +13,7 @@ public class LeaderboardResource implements LeaderboardApi {
 
     @Override
     public ResponseEntity<List<LeaderboardItem>> getLeaderboard() {
-        return LeaderboardApi.super.getLeaderboard();
+
+        return ResponseEntity.ok(DummyData.LEADERBOARD);
     }
 }

@@ -1,0 +1,7 @@
+services:
+  higherlower:
+    build:
+      context: .
+    image: local/higherlower:latest
+    ports:
+      - "9001:8080"
