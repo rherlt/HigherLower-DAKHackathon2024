@@ -19,9 +19,14 @@ public class StaticJsonData {
             try {
                 OptionModel[] optionModels = mapper.readValue(jsonStream, OptionModel[].class);
 
-                Random random = new Random(); // Ein Random-Objekt erstellen
+                Random random = new Random();
                 var random1 = random.nextInt(optionModels.length);
-                var random2 = random.nextInt(optionModels.length);
+                var random2 = 0;
+
+                //recreate random number until they are different
+                do {
+                    random2 = random.nextInt(optionModels.length);
+                } while (random1 == random2);
 
                 return new Pair<>(optionModels[random1], optionModels[random2]);
             } catch (JsonProcessingException e) {
