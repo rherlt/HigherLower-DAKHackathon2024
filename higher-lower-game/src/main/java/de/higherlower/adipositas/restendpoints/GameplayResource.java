@@ -25,7 +25,7 @@ public class GameplayResource implements GameplayApi {
     @Override
     public ResponseEntity<QuestionResponse> getQuestion() {
 
-        var options = StaticJsonData.getTwoOptions();
+        var options = StaticJsonData.getTwoOptions2();
         var result = options.a.getCalories() >= options.b.getCalories() ? QuestionResponse.ResultEnum.OPTION1 : QuestionResponse.ResultEnum.OPTION2;
         var explanation = result.equals(QuestionResponse.ResultEnum.OPTION1) ? options.a.getDescription() : options.b.getDescription();
         var questionResponse = new QuestionResponse("Welches Lebensmittel hat mehr Kalorien pro 100g bzw. 100ml?", options.a.getProduct(), options.b.getProduct(), options.a.getImageBase64(), options.b.getImageBase64(), explanation, result);

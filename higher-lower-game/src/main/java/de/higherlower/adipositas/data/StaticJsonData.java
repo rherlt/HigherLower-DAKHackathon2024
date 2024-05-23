@@ -1,4 +1,5 @@
 package de.higherlower.adipositas.data;
+
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.antlr.v4.runtime.misc.Pair;
@@ -9,6 +10,30 @@ import java.util.Optional;
 import java.util.Random;
 
 public class StaticJsonData {
+
+    public static Pair<OptionModel, OptionModel> getTwoOptions2() {
+
+        try (var jsonStream = Thread.currentThread().getContextClassLoader().getResourceAsStream("products.json")) {
+
+            ObjectMapper mapper = new ObjectMapper();
+            try {
+                OptionModel[] optionModels = mapper.readValue(jsonStream, OptionModel[].class);
+
+                Random random = new Random(); // Ein Random-Objekt erstellen
+                var random1 = random.nextInt(optionModels.length);
+                var random2 = random.nextInt(optionModels.length);
+
+                return new Pair<>(optionModels[random1], optionModels[random2]);
+            } catch (JsonProcessingException e) {
+                return null;
+            }
+        } catch (
+                Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+
     public static Pair<OptionModel, OptionModel> getTwoOptions() {
         // Die JSON-String, den Sie parsen möchten
         String jsonData = """
