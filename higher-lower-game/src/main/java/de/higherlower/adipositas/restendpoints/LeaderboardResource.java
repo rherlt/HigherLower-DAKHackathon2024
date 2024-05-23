@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Comparator;
 import java.util.List;
 
 @RestController
@@ -21,6 +22,7 @@ public class LeaderboardResource implements LeaderboardApi {
         List<LeaderboardItem> list = leaderItemEntityRepository.findAll()
                 .stream()
                 .map(this::convertToLeaderboardItem)
+                .sorted(Comparator.comparingInt(LeaderboardItem::getScore))
                 .toList();
 
         return ResponseEntity.ok(list);
